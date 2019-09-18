@@ -10,6 +10,7 @@ public class GuessNumber {
 	private int attempt;
 	private int computerNumber;
 	private boolean isGuessed;
+	private int attemptCorrection = 0;
 
 	public GuessNumber(Player playerOne, Player playerTwo) {
 		this.playerOne = playerOne;
@@ -34,6 +35,7 @@ public class GuessNumber {
 		playerOne.resetEnteredNumbers(attempt);
 		playerTwo.resetEnteredNumbers(attempt);
 		attempt = 0;
+		attemptCorrection = 0;
 		isGuessed = false;
 		computerNumber = (int) (Math.random()*(101));
 	}
@@ -60,24 +62,17 @@ public class GuessNumber {
 	}
 
 	private void showEnteredNumbers() {
-		if (attempt > 9) {
-			System.out.println("\n" + "---------------------------------------------------------------------------------------");
+		System.out.println("\n" + "---------------------------------------------------------------------------------------");
+		if (attempt >= 10) {
 			System.out.println("Эхх...Никому не удалось угадать число " + computerNumber + " за " + attempt + " попыток.");
-			System.out.println("\n" + playerOne.getName() + ", Вы были первым и вводили числа: " + Arrays.toString(playerOne.getEnteredNumbers(attempt)));
-			System.out.println("\n" + playerTwo.getName() + ", Вы были вторым и вводили числа: " + Arrays.toString(playerTwo.getEnteredNumbers(attempt)));
-			System.out.println("---------------------------------------------------------------------------------------");
 		} else if(playerOne.isWin()) {
-			System.out.println("\n" + "---------------------------------------------------------------------------------------");
 			System.out.println("Ого, у нас есть победитель: " + playerOne.getName() + ". Вот как развивались события до угадывания числа " + computerNumber + "...");
-			System.out.println("\n" + playerOne.getName() + ", Вы были первым и на пути у успеху вводили числа: " + Arrays.toString(playerOne.getEnteredNumbers(attempt)));
-			System.out.println("\n" + playerTwo.getName() + ", Вы были вторым и сделали на один ход меньше и успели ввести: " + Arrays.toString(playerTwo.getEnteredNumbers(attempt -1)));
-			System.out.println("---------------------------------------------------------------------------------------");
+			attemptCorrection = 1;
 		} else {
-			System.out.println("\n" + "---------------------------------------------------------------------------------------");
 			System.out.println("Ого, у нас есть победитель: " + playerTwo.getName() + ". Вот как развивались события до угадывания числа " + computerNumber + "...");
-			System.out.println("\n" + playerOne.getName() + ", Вы были первым, но чуть-чуть не хватило для победы. Вот Ваши попытки: " + Arrays.toString(playerOne.getEnteredNumbers(attempt)));
-			System.out.println("\n" + playerTwo.getName() + ", Вы были вторым, но отгадали число первым. Вот Ваш путь к победе: " + Arrays.toString(playerTwo.getEnteredNumbers(attempt)));
-			System.out.println("---------------------------------------------------------------------------------------");
 		}
+		System.out.println("\n" + playerOne.getName() + ", Вы были первым и вводили числа: " + Arrays.toString(playerOne.getEnteredNumbers(attempt)));
+		System.out.println("\n" + playerTwo.getName() + ", Вы были вторым и вводили числа: " + Arrays.toString(playerTwo.getEnteredNumbers(attempt - attemptCorrection)));
+		System.out.println("---------------------------------------------------------------------------------------");
 	}
 }
