@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Player {
 	private String name;
 	private int[] enteredNumbers = new int[10];
-	private boolean winner;
+	private boolean isWin;
 
 	public Player(String name) {
 		this.name = name;
@@ -15,27 +15,27 @@ public class Player {
 		return name;
 	}
 
-	public boolean isWinner() {
-		return winner;
+	public boolean isWin() {
+		return isWin;
 	}
 
-	public void setWinner(boolean winner) {
-		this.winner = winner;
+	public void setWin(boolean isWin) {
+		this.isWin = isWin;
 	}
 
-	public void setNumber(int tryNum, int number) {
-		this.enteredNumbers[tryNum] = number;
+	public void setNumber(int attempt, int number) {
+		this.enteredNumbers[attempt] = number;
 	}
 
-	public int getNumber(int tryNum) {
-		return enteredNumbers[tryNum];
+	public int getNumber(int attempt) {
+		return enteredNumbers[attempt];
 	}
 
-	public void resetEntered(int tryNum) {
-		Arrays.fill(enteredNumbers, 0, tryNum, 0);
+	public void resetEnteredNumber(int attempt) {
+		Arrays.fill(enteredNumbers, 0, attempt, 0);
 	}
 
-	public String printEntered(int tryNum) {
-		return Arrays.toString(Arrays.copyOf(enteredNumbers, tryNum));
+	public int[] getEnteredNumbers(int attempt) {
+		return Arrays.copyOf(enteredNumbers, attempt);
 	}
 }
