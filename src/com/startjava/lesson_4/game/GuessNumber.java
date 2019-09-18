@@ -19,20 +19,20 @@ public class GuessNumber {
 	public void start() {	
 		init();
 		while(!isGuessed && attempt < 10) {
-				inputNumber(playerOne);
-				compareNumbers(playerOne);
-				if (!isGuessed) {
-					inputNumber(playerTwo);
-					compareNumbers(playerTwo);
-				}
-				attempt++;
+			inputNumber(playerOne);
+			compareNumbers(playerOne);
+			if (!isGuessed) {
+				inputNumber(playerTwo);
+				compareNumbers(playerTwo);
+			}
+			attempt++;
 		}
 		showEnteredNumbers();
 	}
 
 	private void init() {
-		playerOne.resetEnteredNumber(attempt);
-		playerTwo.resetEnteredNumber(attempt);
+		playerOne.resetEnteredNumbers(attempt);
+		playerTwo.resetEnteredNumbers(attempt);
 		attempt = 0;
 		isGuessed = false;
 		computerNumber = (int) (Math.random()*(101));

@@ -31,7 +31,7 @@ public class Player {
 		return enteredNumbers[attempt];
 	}
 
-	public void resetEnteredNumber(int attempt) {
+	public void resetEnteredNumbers(int attempt) {
 		Arrays.fill(enteredNumbers, 0, attempt, 0);
 	}
 
